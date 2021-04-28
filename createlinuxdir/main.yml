@@ -1,0 +1,6 @@
+---
+- name: create linux dir
+  hosts: all
+  gather_facts: false
+  roles:
+    - role: "{{ playbook_dir }}"

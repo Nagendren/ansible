@@ -1,0 +1,10 @@
+---
+- name: create dir
+  file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+    mode: "{{ item.mode }}"
+    recurse: "{{ item.recurse }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+  with_items: "{{ dir_details }}"
