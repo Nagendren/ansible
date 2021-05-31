@@ -1,0 +1,19 @@
+---
+- name: get information from registry path
+  win_reg_stat:
+    path: "{{ item.path }}"
+    name: "{{ item.name }}"
+  with_items:
+    - { path: 'HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl', name: 'DumpFile' }
+    - { path: 'HKLM:\SYSTEM\CurrentControlSet\Control\CrashControl', name: 'AutoReboot' }
+  register: registry_info
+
+- name: setting facts from the results
+  set_fact:
+    registry_results: "{{ registry_results | defaults([]) + ['change Dump File location']}}"
+  when: registry_info.results[0].value != "c:\\Windows\\MEMORY.DMP"
+
+- name:
+  set_fact:
+    registry_results: "{{ registry_results | defaults([]) + ['Enable memory dump auto reboot']}}"
+  when: registry_info.results[1].value != 1

@@ -1,0 +1,13 @@
+[web_server]
+FQDN-hostname
+
+[web_server:vars]
+connection=winrm
+gather_facts=false
+ansible_user=test
+ansible_password=test
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+become_admin=false
+ansible_winrm_operation_timeout_sec=200
+ansible_winrm_read_timeout_sec=300

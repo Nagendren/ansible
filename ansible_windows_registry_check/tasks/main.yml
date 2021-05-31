@@ -1,0 +1,14 @@
+---
+- name: initialize empty varibale
+  set_fact:
+    registry_results: []
+
+- name: include registry check file
+  include_tasks: registry.yml
+
+- name: concatenate the results in varibale
+  set_fact:
+    registry_output: "{{ registry_results | join('\n') | replace('\r\n','. ') }}"
+
+- debug:
+    msg: {{ registry_output }}
